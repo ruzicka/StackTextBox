@@ -91,6 +91,7 @@ public class StackTextBox : MonoBehaviour {
 		
 		restacking = true;
 		restackingData.Clear();
+		restackingProgress = 0f;
 		
 		int counter = 0;
 		foreach(StackText text in texts) {
@@ -103,7 +104,7 @@ public class StackTextBox : MonoBehaviour {
 	private void restack() {
 		bool lastIteration = false;
 		
-		float step = 1.5f * Time.deltaTime;
+		float step = 2f * Time.deltaTime;
 		if ((restackingProgress + step) >= 1f) {
 			step = 1f - restackingProgress;
 			lastIteration = true;

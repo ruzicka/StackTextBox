@@ -105,7 +105,6 @@ public class StackText : MonoBehaviour {
 	
 	private void OnAutoHideTimerElapsed(object sender, ElapsedEventArgs e) {
 		timer.Enabled = false;
-		Debug.Log("sdfsfd");
 		hide = true; // hide can be called only in main thread :(
 	}
 
