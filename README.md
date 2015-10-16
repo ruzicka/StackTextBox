@@ -18,6 +18,10 @@ Download the project and copy content of the Assets directory to your Unity proj
 	// it can be used later to hide message. Hiding message effectively 
 	// removes it from the stack.
 	msg.Hide();
+	
+	// text message can be hidden automatically after specified time (miliseconds) 
+	msgBox.AddText("This message will self-desctruct in 5 seconds", 5000);
+	
 ```
 
 
