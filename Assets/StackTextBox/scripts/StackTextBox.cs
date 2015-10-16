@@ -111,12 +111,13 @@ public class StackTextBox : MonoBehaviour {
 		}
 
 		restackingProgress += step;
+		float restackingProgressSmoothed = Mathf.SmoothStep(0f, 1f, restackingProgress);
 		
 		int counter = 0;
 		foreach(StackText text in texts) {
 			Vector2 vect = restackingData[counter];
 			Vector3 tr = text.transform.localPosition;
-			tr.y = vect.x - ((vect.x - vect.y) * restackingProgress);
+			tr.y = vect.x - ((vect.x - vect.y) * restackingProgressSmoothed);
 			text.transform.localPosition = tr;
 			counter++;
 		}
