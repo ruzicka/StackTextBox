@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Timers;
 
 public class StackText : MonoBehaviour {
 
@@ -7,6 +8,8 @@ public class StackText : MonoBehaviour {
 	public delegate void StackTextCallback(StackText stackText);
 	protected StackTextCallback hidingDoneCallbacks;
 	protected StackTextCallback hidingStartedCallbacks;
+	protected Timer timer = null;
+	bool hide = false;
 
 	public string text {
 		set { GetTextTextComponent().text = value; }
@@ -86,15 +89,37 @@ public class StackText : MonoBehaviour {
 			hidingStartedCallbacks(this);
 		}
 	}
+	
+	
+	public void AutoHide(int miliseconds) {
+		if (timer != null) {
+			Debug.Log("Unable autoHide text. Hidding was already initiated");
+			return;
+		}
+		
+		timer = new Timer(miliseconds);
+		timer.Elapsed += new ElapsedEventHandler(OnAutoHideTimerElapsed);
+		timer.Enabled = true;
+	}
+	
+	
+	private void OnAutoHideTimerElapsed(object sender, ElapsedEventArgs e) {
+		timer.Enabled = false;
+		Debug.Log("sdfsfd");
+		hide = true; // hide can be called only in main thread :(
+	}
 
 
 	public void Destroy() {
 		Destroy(gameObject);
 	}
 	
+	
 	// Update is called once per frame
 	void Update () {
-	
+		if (hide) {
+			this.Hide();
+		}
 	}
 	
 }

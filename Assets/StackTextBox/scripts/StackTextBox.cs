@@ -40,7 +40,7 @@ public class StackTextBox : MonoBehaviour {
 	}
 
 
-	public StackText AddText(string text) {
+	public StackText AddText(string text, int autoHideTime = 0) {
 		GameObject obj = MonoBehaviour.Instantiate(this.stackTextPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 		obj.transform.SetParent(gameObject.transform, false);
 		StackText stackText = obj.GetComponent<StackText>();
@@ -54,6 +54,9 @@ public class StackTextBox : MonoBehaviour {
 		stackText.Show();
 		stackText.AddOnHiddingDoneCallback(onTextHiddenDone);
 		stackText.AddOnHiddingStartedCallback(onTextHiddenStarted);
+		if (autoHideTime > 0) {
+			stackText.AutoHide(autoHideTime);
+		}
 		if (restacking) {
 			restackInit();
 		}
