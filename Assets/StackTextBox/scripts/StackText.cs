@@ -9,7 +9,8 @@ public class StackText : MonoBehaviour {
 	protected StackTextCallback hidingDoneCallbacks;
 	protected StackTextCallback hidingStartedCallbacks;
 	protected Timer timer = null;
-	bool hide = false;
+	private bool hide = false;
+	private bool isHidden = false;
 
 	public string text {
 		set { GetTextTextComponent().text = value; }
@@ -18,6 +19,10 @@ public class StackText : MonoBehaviour {
 	
 	public float height {
 		get { return GetTextTextComponent().preferredHeight; }
+	}
+	
+	public bool hidden {
+		get { return isHidden; }
 	}
 	
 	public Font font {
@@ -72,6 +77,7 @@ public class StackText : MonoBehaviour {
 	
 	
 	public void Hide() {
+		isHidden = true;
 		Animator animator = GetTextComponent().GetComponent<Animator>();
 		animator.SetBool(Animator.StringToHash("shown"), false);	
 	}
